@@ -1,0 +1,5 @@
+title: '.title'
+inventoryItems: '.inventory_item'
+cartBadge: '.shopping_cart_badge'
+cartLink: '.shopping_cart_link'
+addToCartButton: 'button'

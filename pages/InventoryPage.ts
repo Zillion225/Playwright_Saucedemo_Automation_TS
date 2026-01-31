@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+import { LocatorLoader } from '../utils/LocatorLoader';
 
 export class InventoryPage {
     readonly page: Page;
@@ -9,15 +10,15 @@ export class InventoryPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.title = page.locator('.title');
-        this.inventoryItems = page.locator('.inventory_item');
-        this.cartBadge = page.locator('.shopping_cart_badge');
-        this.cartLink = page.locator('.shopping_cart_link');
+        this.title = page.locator(LocatorLoader.get('InventoryPage', 'title'));
+        this.inventoryItems = page.locator(LocatorLoader.get('InventoryPage', 'inventoryItems'));
+        this.cartBadge = page.locator(LocatorLoader.get('InventoryPage', 'cartBadge'));
+        this.cartLink = page.locator(LocatorLoader.get('InventoryPage', 'cartLink'));
     }
 
     async addItemToCart(itemName: string) {
-        const item = this.page.locator('.inventory_item', { hasText: itemName });
-        await item.locator('button', { hasText: 'Add to cart' }).click();
+        const item = this.page.locator(LocatorLoader.get('InventoryPage', 'inventoryItems'), { hasText: itemName });
+        await item.locator(LocatorLoader.get('InventoryPage', 'addToCartButton'), { hasText: 'Add to cart' }).click();
     }
 
     async goToCart() {

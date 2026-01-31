@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+import { LocatorLoader } from '../utils/LocatorLoader';
 
 export class CheckoutPage {
     readonly page: Page;
@@ -12,13 +13,13 @@ export class CheckoutPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.firstNameInput = page.locator('[data-test="firstName"]');
-        this.lastNameInput = page.locator('[data-test="lastName"]');
-        this.postalCodeInput = page.locator('[data-test="postalCode"]');
-        this.continueButton = page.locator('[data-test="continue"]');
-        this.finishButton = page.locator('[data-test="finish"]');
-        this.completeHeader = page.locator('.complete-header');
-        this.backHomeButton = page.locator('[data-test="back-to-products"]');
+        this.firstNameInput = page.locator(LocatorLoader.get('CheckoutPage', 'firstNameInput'));
+        this.lastNameInput = page.locator(LocatorLoader.get('CheckoutPage', 'lastNameInput'));
+        this.postalCodeInput = page.locator(LocatorLoader.get('CheckoutPage', 'postalCodeInput'));
+        this.continueButton = page.locator(LocatorLoader.get('CheckoutPage', 'continueButton'));
+        this.finishButton = page.locator(LocatorLoader.get('CheckoutPage', 'finishButton'));
+        this.completeHeader = page.locator(LocatorLoader.get('CheckoutPage', 'completeHeader'));
+        this.backHomeButton = page.locator(LocatorLoader.get('CheckoutPage', 'backHomeButton'));
     }
 
     async fillCustomerInfo(firstName: string, lastName: string, postalCode: string) {

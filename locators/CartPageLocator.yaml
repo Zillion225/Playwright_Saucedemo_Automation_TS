@@ -1,0 +1,5 @@
+title: '.title'
+cartItems: '.cart_item'
+checkoutButton: '[data-test="checkout"]'
+continueShoppingButton: '[data-test="continue-shopping"]'
+itemNames: '.cart_item .inventory_item_name'

@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+import { LocatorLoader } from '../utils/LocatorLoader';
 
 export class CartPage {
     readonly page: Page;
@@ -9,10 +10,10 @@ export class CartPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.title = page.locator('.title');
-        this.cartItems = page.locator('.cart_item');
-        this.checkoutButton = page.locator('[data-test="checkout"]');
-        this.continueShoppingButton = page.locator('[data-test="continue-shopping"]');
+        this.title = page.locator(LocatorLoader.get('CartPage', 'title'));
+        this.cartItems = page.locator(LocatorLoader.get('CartPage', 'cartItems'));
+        this.checkoutButton = page.locator(LocatorLoader.get('CartPage', 'checkoutButton'));
+        this.continueShoppingButton = page.locator(LocatorLoader.get('CartPage', 'continueShoppingButton'));
     }
 
     async checkout() {
@@ -20,7 +21,7 @@ export class CartPage {
     }
 
     async getCartItemNames(): Promise<string[]> {
-        const names = await this.page.locator('.cart_item .inventory_item_name').allTextContents();
+        const names = await this.page.locator(LocatorLoader.get('CartPage', 'itemNames')).allTextContents();
         return names;
     }
 }

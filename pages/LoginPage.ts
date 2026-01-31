@@ -1,4 +1,5 @@
 import { type Locator, type Page } from '@playwright/test';
+import { LocatorLoader } from '../utils/LocatorLoader';
 
 export class LoginPage {
     readonly page: Page;
@@ -11,12 +12,12 @@ export class LoginPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.usernameInput = page.locator('[data-test="username"]');
-        this.passwordInput = page.locator('[data-test="password"]');
-        this.loginButton = page.locator('[data-test="login-button"]');
-        this.errorMessage = page.locator('[data-test="error"]');
-        this.loginCredentials = page.locator('#login_credentials');
-        this.loginPassword = page.locator('.login_password');
+        this.usernameInput = page.locator(LocatorLoader.get('LoginPage', 'usernameInput'));
+        this.passwordInput = page.locator(LocatorLoader.get('LoginPage', 'passwordInput'));
+        this.loginButton = page.locator(LocatorLoader.get('LoginPage', 'loginButton'));
+        this.errorMessage = page.locator(LocatorLoader.get('LoginPage', 'errorMessage'));
+        this.loginCredentials = page.locator(LocatorLoader.get('LoginPage', 'loginCredentials'));
+        this.loginPassword = page.locator(LocatorLoader.get('LoginPage', 'loginPassword'));
     }
 
     async getAcceptedUsernames(): Promise<string[]> {
