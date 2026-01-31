@@ -23,18 +23,37 @@ export class LoginPage {
 
     async getAcceptedUsernames(): Promise<string[]> {
         // Use innerText (via evaluate) to properly handle <br> tags as newlines
-        const text = await this.loginCredentials.evaluate((el: Element) => (el as HTMLElement).innerText) ?? '';
-        // Extract usernames from the text (each username is on a new line after the header)
-        const lines = text.split('\n').map((line: string) => line.trim()).filter((line: string) => line.length > 0);
-        // Remove the header "Accepted usernames are:"
-        return lines.filter((line: string) => !line.includes('Accepted usernames'));
+        const rawText = await this.loginCredentials.evaluate((el: Element) => (el as HTMLElement).innerText) ?? '';
+
+        // Break text into lines, trim whitespace, and remove empty lines
+        const lines = rawText.split('\n');
+        const trimmedLines = lines.map((line) => line.trim());
+        const filteredLines = trimmedLines.filter((line) => line.length > 0);
+
+        // Filter out the header text to get only the actual usernames
+        const usernames = filteredLines.filter((line) => {
+            const isHeader = line.includes('Accepted usernames');
+            return !isHeader;
+        });
+
+        return usernames;
     }
 
     async getPassword(): Promise<string> {
-        const text = await this.loginPassword.evaluate((el: Element) => (el as HTMLElement).innerText) ?? '';
-        const lines = text.split('\n').map((line: string) => line.trim()).filter((line: string) => line.length > 0);
-        // Return the password (second line after header)
-        return lines.find((line: string) => !line.includes('Password')) ?? 'secret_sauce';
+        const rawText = await this.loginPassword.evaluate((el: Element) => (el as HTMLElement).innerText) ?? '';
+
+        // Break text into lines, trim whitespace, and remove empty lines
+        const lines = rawText.split('\n');
+        const trimmedLines = lines.map((line) => line.trim());
+        const filteredLines = trimmedLines.filter((line) => line.length > 0);
+
+        // Find the line that doesn't contain the header 'Password'
+        const passwordLine = filteredLines.find((line) => {
+            const isHeader = line.includes('Password');
+            return !isHeader;
+        });
+
+        return passwordLine ?? 'secret_sauce';
     }
 
     async goto() {
