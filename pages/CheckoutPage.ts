@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { LocatorLoader } from '../utils/LocatorLoader';
+import { PageName } from '../constants/PageNames';
 
 export class CheckoutPage {
     readonly page: Page;
@@ -13,13 +14,13 @@ export class CheckoutPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.firstNameInput = page.locator(LocatorLoader.get('CheckoutPage', 'firstNameInput'));
-        this.lastNameInput = page.locator(LocatorLoader.get('CheckoutPage', 'lastNameInput'));
-        this.postalCodeInput = page.locator(LocatorLoader.get('CheckoutPage', 'postalCodeInput'));
-        this.continueButton = page.locator(LocatorLoader.get('CheckoutPage', 'continueButton'));
-        this.finishButton = page.locator(LocatorLoader.get('CheckoutPage', 'finishButton'));
-        this.completeHeader = page.locator(LocatorLoader.get('CheckoutPage', 'completeHeader'));
-        this.backHomeButton = page.locator(LocatorLoader.get('CheckoutPage', 'backHomeButton'));
+        this.firstNameInput = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'firstNameInput'));
+        this.lastNameInput = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'lastNameInput'));
+        this.postalCodeInput = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'postalCodeInput'));
+        this.continueButton = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'continueButton'));
+        this.finishButton = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'finishButton'));
+        this.completeHeader = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'completeHeader'));
+        this.backHomeButton = page.locator(LocatorLoader.get(PageName.CheckoutPage, 'backHomeButton'));
     }
 
     async fillCustomerInfo(firstName: string, lastName: string, postalCode: string) {

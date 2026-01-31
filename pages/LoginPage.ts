@@ -1,5 +1,6 @@
 import { type Locator, type Page } from '@playwright/test';
 import { LocatorLoader } from '../utils/LocatorLoader';
+import { PageName } from '../constants/PageNames';
 
 export class LoginPage {
     readonly page: Page;
@@ -12,12 +13,12 @@ export class LoginPage {
 
     constructor(page: Page) {
         this.page = page;
-        this.usernameInput = page.locator(LocatorLoader.get('LoginPage', 'usernameInput'));
-        this.passwordInput = page.locator(LocatorLoader.get('LoginPage', 'passwordInput'));
-        this.loginButton = page.locator(LocatorLoader.get('LoginPage', 'loginButton'));
-        this.errorMessage = page.locator(LocatorLoader.get('LoginPage', 'errorMessage'));
-        this.loginCredentials = page.locator(LocatorLoader.get('LoginPage', 'loginCredentials'));
-        this.loginPassword = page.locator(LocatorLoader.get('LoginPage', 'loginPassword'));
+        this.usernameInput = page.locator(LocatorLoader.get(PageName.LoginPage, 'usernameInput'));
+        this.passwordInput = page.locator(LocatorLoader.get(PageName.LoginPage, 'passwordInput'));
+        this.loginButton = page.locator(LocatorLoader.get(PageName.LoginPage, 'loginButton'));
+        this.errorMessage = page.locator(LocatorLoader.get(PageName.LoginPage, 'errorMessage'));
+        this.loginCredentials = page.locator(LocatorLoader.get(PageName.LoginPage, 'loginCredentials'));
+        this.loginPassword = page.locator(LocatorLoader.get(PageName.LoginPage, 'loginPassword'));
     }
 
     async getAcceptedUsernames(): Promise<string[]> {

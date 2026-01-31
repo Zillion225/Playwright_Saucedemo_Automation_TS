@@ -5,8 +5,10 @@ This project contains an automated test suite for the [Saucedemo](https://www.sa
 ## 🚀 Key Features
 
 - **Page Object Model (POM)**: Organized and maintainable code structure (`pages/` directory).
+- **Strong Typing & Standardization**: Uses Enums and TS interfaces for Robust Locator loading.
 - **Locator Management**: Locators are externally managed in YAML files (`locators/` directory) for easy maintenance.
 - **Dynamic Username Fetching**: Tests dynamically scrape valid usernames from the login page, ensuring resilience against data changes.
+- **Test Isolation**: Parameterized tests using `test.step` for granular reporting.
 - **End-to-End (E2E) Scenarios**: Covers critical user flows like Login and Checkout.
 - **Robustness**: Includes `waitFor` strategies to handle dynamic element loading.
 - **Documentation**: Comprehensive JSDoc comments for all test cases.
@@ -67,6 +69,10 @@ TestProject1/
 │   ├── InventoryPageLocator.yaml
 │   ├── CartPageLocator.yaml
 │   └── CheckoutPageLocator.yaml
+├── constants/              # Shared Constants
+│   └── PageNames.ts        # Page Identity Enum
+├── types/                  # Type Definitions
+│   └── LocatorTypes.ts     # Interfaces for Locators
 ├── utils/                  # Utilities
 │   └── LocatorLoader.ts    # YAML Locator Loader
 ├── tests/                  # Test Specifications

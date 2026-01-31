@@ -133,17 +133,19 @@ test.describe('Login Tests - Dynamic Usernames', () => {
         console.log('Valid users to test:', validUsers);
 
         for (const username of validUsers) {
-            // Reset state by going back to login for each user
-            await loginPage.goto();
-            await loginPage.login(username, password);
+            await test.step(`Login as ${username}`, async () => {
+                // Reset state by going back to login for each user
+                await loginPage.goto();
+                await loginPage.login(username, password);
 
-            // Verify successful login
-            const url = page.url();
-            if (url.includes('inventory')) {
-                const inventoryPage = new InventoryPage(page);
-                await expect(inventoryPage.title).toHaveText('Products');
-                console.log(`✅ ${username}: Login successful`);
-            }
+                // Verify successful login
+                const url = page.url();
+                if (url.includes('inventory')) {
+                    const inventoryPage = new InventoryPage(page);
+                    await expect(inventoryPage.title).toHaveText('Products');
+                    console.log(`✅ ${username}: Login successful`);
+                }
+            });
         }
     });
 
